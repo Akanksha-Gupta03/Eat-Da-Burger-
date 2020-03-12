@@ -30,5 +30,5 @@ const db = new Database({
     port: 3306,
     user: "root",
     password: "akanksha12",
-    database: "burgerLog" 
+    database: "eatDaBurger" 
 });
