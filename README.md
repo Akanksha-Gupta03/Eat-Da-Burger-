@@ -1,6 +1,6 @@
 # Eat-Da-Burger
 
-Created a burger logger application that uses MySQL, Node, Express, Handlebars and a homemade ORM (yum!).s
+Created a burger logger application that uses MySQL, Node, Express and a homemade ORM (yum!).
 
 ## Installations
 
