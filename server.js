@@ -12,7 +12,7 @@ app.post("/api/burgerChoice", async function(req, res){
     const savedBurger = await orm.saveBurgerName(req.body);
     console.log(savedBurger);
 
-    res.send("Success!!")
+    res.send("savedburger!!")
 
 });
 
@@ -27,16 +27,14 @@ app.put("/api/burgerUpdate/:id", async function(req, res){
     console.log(req.params.id)
     const updateBurger = await orm.devouredBurger(req.params.id);
 
-    res.send("Success!!")
+    res.send("updated burger!!")
 
 });
-
-//getting the updated burgerInfo
 app.get("/api/updatedBurger", async function(req, res){
     const getUpdated = await orm.getdevourededBurger();
     res.send(getUpdated)
 });
 
 app.listen( PORT, function(){
-    console.log( `[burger] RUNNING, http://localhost:${PORT}` );
+    console.log( `[eat-da-burger] RUNNING, http://localhost:${PORT}` );
 });

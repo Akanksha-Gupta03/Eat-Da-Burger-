@@ -46,9 +46,9 @@ async function saveBurgerName(userBurger){
 }
 
 async function getBurgerName(){
-    const getBurgerNameSql = await db.query("SELECT * FROM burgerNames wHERE devoured=0");
-    console.log(getBurgerNameSql);
-    return getBurgerNameSql;
+    const getBurgerNameDb = await db.query("SELECT * FROM burgerNames wHERE devoured=0");
+    console.log(getBurgerNameDb);
+    return getBurgerNameDb;
 }
 
 async function devouredBurger(burgerId){
