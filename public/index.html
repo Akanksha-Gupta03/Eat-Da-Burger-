@@ -60,6 +60,63 @@
                     </div>
                 </div>
             </div>
-        </div>     
+        </div>   
+        
+        <script>
+            $(document).ready(async function(){
+                $("#submitBtn").on("click", async function(event){
+                    event.preventDefault();
+
+                    const burgerName = {
+                        name: $("#burgerText").val(),
+                    }
+                    console.log(burgerName);
+                    
+                    const burgerPost = await $.post("/api/burgerChoice", burgerName);
+
+                    const getBurgerName = await $.get("/api/burgerChoice");
+                    $("#appendBurger").html("");
+
+                    getBurgerName.forEach( (burger) => {
+                        $("#appendBurger").append(
+                            `
+                            <div class="input-group mb-3" id="burger${burger.id}">
+                                <li class="list-group-item form-control">${burger.name}</li>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger" type="button" onClick="devourBtn('${burger.id}')">
+                                        Devour it!!
+                                    </button>
+                                </div>
+                            </div> 
+                            `
+                        )
+                    });
+
+                    $("#burgerText").html();
+                });
+            });
+
+            async function devourBtn(id){
+                //remove from left div section
+                $(`#burger${id}`).remove();
+                //update info in database
+                const burgerUpdate = await $.ajax({
+                    url: `/api/burgerUpdate/${id}`,
+                    type: "PUT"
+                });
+
+                //get the updated info from database and append
+                const getUpdatedBurger = await $.get("/api/updatedBurger");
+                $("#devouredBurgers").html("");
+
+                getUpdatedBurger.forEach( (burger) => { 
+                    $("#devouredBurgers").append(
+                        `
+                            <li class="list-group-item">${burger.name}</li>
+                        `
+                    )
+                });
+            };
+        </script>  
     </body>
 </html>
