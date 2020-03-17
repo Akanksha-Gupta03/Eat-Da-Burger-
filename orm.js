@@ -1,15 +1,11 @@
 const mysql = require("mysql");
+var db;
 
 //connection to my sql
 class Database {
     constructor( config ) {
 
-        if(process.env.JAWSDB_URL){
-            this.connection = mysql.createConnection(process.env.JAWSDB_URL);
-        }
-        else{
             this.connection = mysql.createConnection( config );
-        }
         
     }
     query( sql, args=[] ) {
@@ -31,14 +27,21 @@ class Database {
         } );
     }
 }
+if(process.env.JAWSDB_URL){
+    db = new Database ( process.env.JAWSDB_URL)
+       
+    
+}else {
+        db = new Database({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "akanksha12",
+        database: "burgerlog" 
+    });
 
-const db = new Database({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "akanksha12",
-    database: "burgerlog" 
-});
+}
+
 
 async function saveBurgerName(userBurger){
     const burgerSqlSave = await db.query("INSERT INTO burgerNames(name) VALUES(?)", [userBurger.name]);
