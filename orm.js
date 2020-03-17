@@ -3,7 +3,14 @@ const mysql = require("mysql");
 //connection to my sql
 class Database {
     constructor( config ) {
-        this.connection = mysql.createConnection( config );
+
+        if(process.env.JAWSDB_URL){
+            this.connection = mysql.createConnection(process.env.JAWSDB>URL);
+        }
+        else{
+            this.connection = mysql.createConnection( config );
+        }
+        
     }
     query( sql, args=[] ) {
         return new Promise( ( resolve, reject ) => {
@@ -32,3 +39,10 @@ const db = new Database({
     password: "akanksha12",
     database: "eatDaBurger" 
 });
+
+async function saveUserBurger(userBurger){
+    const saveBurgerDb = await db.query("INSERT INTO burgerLog(name) VALUES(?)",[userBurger.name]);
+    console.log(saveBurgerDb[0]);
+
+}
+
