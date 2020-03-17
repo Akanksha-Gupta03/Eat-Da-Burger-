@@ -5,7 +5,7 @@ class Database {
     constructor( config ) {
 
         if(process.env.JAWSDB_URL){
-            this.connection = mysql.createConnection(process.env.JAWSDB>URL);
+            this.connection = mysql.createConnection(process.env.JAWSDB_URL);
         }
         else{
             this.connection = mysql.createConnection( config );
